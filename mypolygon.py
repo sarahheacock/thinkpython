@@ -14,7 +14,6 @@ def polyline(t, n, length, angle):
         t.fd(length)
         t.lt(angle)
 
-
 def polygon(t, length, n):
     angle = 360.0 / n
     polyline(t, n, length, angle)
@@ -27,9 +26,9 @@ def arc(t, r, angle):
 
     # making a slight left turn before starting reduces
     # the error caused by the linear approximation of the arc
-    t.lt(step_angle/2)
+    #t.lt(step_angle/2)
     polyline(t, n, step_length, step_angle)
-    t.rt(step_angle/2)
+    #t.rt(step_angle/2)
 
 def circle(t, r):
     num = 360
@@ -60,23 +59,23 @@ def pie(t, n):
         triangle(t, n, 50)
 
 
-def flower(t, n):
-    step_angle = 360.0/n
-    for i in range(n):
-        arc(t, 50, step_angle)
-        t.lt(step_angle * 2)
-        t.rt(180)
 
-        arc(t, 50, step_angle)
+def flower(t, n, l):
+    step_angle = 360.0/n
+    #step_angle = float(l)
+    for i in range(n):
+        arc(t, l, step_angle)
+        t.lt(180 - step_angle)
+
+        arc(t, l, step_angle)
         t.lt(step_angle)
-        #t.rt(step_angle)
 
 bob = turtle.Turtle()
 # square(bob, 100)
 # square(bob, 50)
 # polygon(bob, 100, 5)
 # polygon(bob, 100, 6)
-flower(bob, 5)
+flower(bob, 10, 150)
 
 
 turtle.mainloop()
